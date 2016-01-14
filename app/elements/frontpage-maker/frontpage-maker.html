@@ -1,0 +1,49 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="frontpage-maker">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      paper-material {
+        padding: 20px;
+        width: 300px;
+      }
+    </style>
+
+    <paper-material elevation="1" style="height: 350px">
+      <paper-input label="Title"></paper-input>
+      <paper-input label="Sub Title"></paper-input>
+      <div id="smallinput">
+        <paper-input label="Size" style="width: 50px; float: left; padding-right: 20px;"></paper-input>
+        <paper-input label="Order" style="width: 50px; float: left;"></paper-input>
+        <paper-button raised style="float: right; margin: 10px">Image<iron-icon icon="add-circle"></iron-icon></paper-icon-button>
+      </div>
+      <paper-input label="URL" style="float: left; clear: left;"></paper-input>
+
+      <div class="buttons" style="padding: 20px; float: left; clear: left;">
+        <paper-button raised style="background-color: red; color: white;" dialog-confirm on-tap="_add">Add</paper-button>
+        <paper-button dialog-dismiss>Cancel</paper-button>
+      </div>
+    </paper-material>
+
+  </template>
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'frontpage-maker',
+
+        properties: {
+          foo: {
+            type: String,
+            value: 'Wo. This is just a placeholder',
+            notify: true
+          }
+        }
+      });
+    })();
+  </script>
+</dom-module>
