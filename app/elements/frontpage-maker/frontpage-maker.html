@@ -16,6 +16,10 @@
     <template is="dom-repeat" items="{{boxes}}">
       <paper-material elevation="1" style="height: 350px">
         <h2>{{item.title}}</h2>
+        <h3>{{item.subTitle}}</h3>
+        <span>{{item.size}}</span>
+        <span>{{item.order}}</span>
+        <span>{{item.url}}</span>
       </paper-material>
     </template>
     <paper-material elevation="1" style="height: 350px">
@@ -48,12 +52,12 @@
         },
 
         _add: function() {
-          this.push('boxes', this._boxing)          
+          this.push('boxes', this._boxing)
         },
         _cancal : function() {
           this.set('_boxing', {})
         },
-        
+
       });
     })();
   </script>
