@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/mediator-data/mediator-data.html">
 
 <dom-module id="frontpage-maker">
   <template>
@@ -11,16 +12,21 @@
         width: 300px;
       }
     </style>
-
+    <mediator-data data="{{data}}" as-array="{{boxes}}" location="https://eh-frontpage.firebaseio.com/frontpage" folder="boxes"></mediator-data>
+    <template is="dom-repeat" items="{{boxes}}">
+      <paper-material elevation="1" style="height: 350px">
+        <h2>{{item.title}}</h2>
+      </paper-material>
+    </template>
     <paper-material elevation="1" style="height: 350px">
-      <paper-input label="Title"></paper-input>
-      <paper-input label="Sub Title"></paper-input>
+      <paper-input label="Title" value="{{_boxing.title}}"></paper-input>
+      <paper-input label="Sub Title" value="{{_boxing.subTitle}}"></paper-input>
       <div id="smallinput">
-        <paper-input label="Size" style="width: 50px; float: left; padding-right: 20px;"></paper-input>
-        <paper-input label="Order" style="width: 50px; float: left;"></paper-input>
+        <paper-input label="Size" style="width: 50px; float: left; padding-right: 20px;" value="{{_boxing.size}}"></paper-input>
+        <paper-input label="Order" style="width: 50px; float: left;" value="{{_boxing.order}}"></paper-input>
         <paper-button raised style="float: right; margin: 10px">Image<iron-icon icon="add-circle"></iron-icon></paper-icon-button>
       </div>
-      <paper-input label="URL" style="float: left; clear: left;"></paper-input>
+      <paper-input label="URL" style="float: left; clear: left;" value="{{_boxing.url}}"></paper-input>
 
       <div class="buttons" style="padding: 20px; float: left; clear: left;">
         <paper-button raised style="background-color: red; color: white;" dialog-confirm on-tap="_add">Add</paper-button>
@@ -37,12 +43,17 @@
         is: 'frontpage-maker',
 
         properties: {
-          foo: {
-            type: String,
-            value: 'Wo. This is just a placeholder',
-            notify: true
-          }
-        }
+          _boxing: {type: Object, value: {}},
+          boxes: {value: []}
+        },
+
+        _add: function() {
+          this.push('boxes', this._boxing)          
+        },
+        _cancal : function() {
+          this.set('_boxing', {})
+        },
+        
       });
     })();
   </script>
