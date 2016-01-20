@@ -7,36 +7,45 @@
       :host {
         display: block;
       }
-      paper-material {
-        padding: 20px;
-        width: 300px;
+      #config {
+        margin: 10px;
       }
-      span {
-        width: 100%;
-        float: left;
-        margin: 0 0 10px 0px;
+      h4 {
+        margin: 0px;
       }
+
     </style>
     <mediator-data data="{{data}}" as-array="{{boxes}}" location="https://eh-frontpage.firebaseio.com/frontpage" folder="boxes"></mediator-data>
     <div id="imageLibrary" style="float: left; width: 100%; ">
-      <a href="https://drive.google.com/folderview?id=0BzzTbD_bWLfrNUtSWXo5R25fM0E&usp=sharing"><paper-button raised style="float: left; margin: 10px"><iron-icon icon="folder"></iron-icon> Image Library </paper-icon-button></a>
+      <a href="https://drive.google.com/folderview?id=0BzzTbD_bWLfrNUtSWXo5R25fM0E&usp=sharing">
+        <paper-button raised style="float: left; margin: 10px">
+          <iron-icon icon="folder"></iron-icon> Image Library </paper-icon-button>
+      </a>
     </div>
     <div id="boxdone" horizontal layout>
       <template is="dom-repeat" items="{{boxes}}">
-        <paper-material elevation="1" style="height: 300px; width: 250px; float:left; margin: 10px;">
-          <h2 style="width: 100%; float: left; margin: 0 0 5px 0;">{{item.title}}</h2>
-          <h3 style="width: 100%; float: left; margin: 0 0 5px 0;">{{item.subTitle}}</h3>
-          <span>Size: {{item.size}}</span>
-          <span>Order: {{item.order}}</span>
-          <div id="urlshow">
-            <span style="margin-bottom: 0;">URL</span>
-            <span style="width: 100%; float: left;">{{item.url}}</span>
+        <paper-material elevation="1" style="height: 400px; width: 300px; float:left; margin: 10px;">
+          <div id="textBox" style="padding: 20px;">
+            <h2 style="width: 100%; float: left; margin: 0 0 5px 0; font-weight: 300;">{{item.title}}</h2>
+            <h3 style="width: 100%; float: left; margin: 0 0 5px 0; font-weight: 300;">{{item.subTitle}}</h3>
+            <div id="config" style="float: left;">
+              <h4>Size</h4>
+              <span>{{item.size}}</span>
+            </div>
+            <div id="config" style="float: right;">
+              <h4>Order</h4>
+              <span>{{item.order}}</span>
+            </div>
+            <div id="config" style="width: 100%; float: left;">
+              <h4>URL</h4>
+              <span>{{item.url}}</span>
+            </div>
           </div>
-          <iron-image style="width: 100%; float: left;" src="{{item.pic}}" preload sizing="cover"></iron-image>
+          <iron-image style="height: 150px; width: 100%; position: absolute; left: 0; bottom: 0;" src="{{item.image}}" sizing="cover"></iron-image>
         </paper-material>
       </template>
     </div>
-    <paper-material elevation="1" style="height: 350px; width: 250px;float: left; margin: 10px;">
+    <paper-material elevation="1" style="height: 400px; width: 250px;float: left; margin: 10px; padding: 30px;">
       <paper-input label="Title" value="{{_boxing.title}}"></paper-input>
       <paper-input label="Sub Title" value="{{_boxing.subTitle}}"></paper-input>
       <div id="smallinput">
@@ -44,7 +53,7 @@
         <paper-input label="Order" style="width: 50px; float: left;" value="{{_boxing.order}}"></paper-input>
       </div>
       <paper-input label="URL" style="float: left; clear: left; width: 100%;" value="{{_boxing.url}}"></paper-input>
-      <paper-input label="Image URL" style="float: left; clear: left; width: 100%;" value="{{_boxing.pic}}"></paper-input>
+      <paper-input label="Image URL" style="float: left; clear: left; width: 100%;" value="{{_boxing.image}}"></paper-input>
 
       <div class="buttons" style="padding: 20px; float: left; clear: left;">
         <paper-button raised style="background-color: red; color: white;" dialog-confirm on-tap="_add">Add</paper-button>
@@ -61,14 +70,19 @@
         is: 'frontpage-maker',
 
         properties: {
-          _boxing: {type: Object, value: {}},
-          boxes: {value: []}
+          _boxing: {
+            type: Object,
+            value: {}
+          },
+          boxes: {
+            value: []
+          }
         },
 
         _add: function() {
           this.push('boxes', this._boxing);
         },
-        _cancel : function() {
+        _cancel: function() {
           this.set('_boxing', {});
         }
 
