@@ -74,6 +74,11 @@
             <iron-icon icon="mail"></iron-icon>
             <span>Settings</span>
           </a>
+
+          <a data-route="blocks" href="/blocks" on-click="onDataRouteClick">
+            <iron-icon icon="content-copy"></iron-icon>
+            <span>Front Page</span>
+          </a>
         </paper-menu>
       </paper-scroll-header-panel>
 
@@ -111,7 +116,12 @@
                 <p>This is the settings menu</p>
               </paper-material>
             </section>
-            
+
+            <section data-route="blocks">
+        Some stuff
+
+            </section>
+
           </iron-pages>
         </div>
       </paper-scroll-header-panel>
