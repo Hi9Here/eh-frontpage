@@ -21,7 +21,8 @@
       <template is="dom-repeat" items="{{boxes}}">
         <paper-material elevation="1" style="height: 550px; width: 300px; float:left; margin: 10px;">
           <div id="textBox" style="padding: 20px;">
-            <paper-input label="Title" value={{item.title}} id="titlefont" style="width: 100%; float: left; margin: 0 0 5px 0; font-weight: 300;"></paper-input>
+            <iron-image style="height: 150px; width: 100%; position: absolute; left: 0; top: 0;" src="{{item.image}}" sizing="cover"></iron-image>
+            <paper-input label="Title" value={{item.title}} id="titlefont" style="width: 100%; float: left; margin: 140px 0 5px 0; font-weight: 300;"></paper-input>
             <paper-input label="Sub Title" value={{item.subTitle}} id="titlefont" style="width: 100%; float: left; margin: 0 0 5px 0; font-weight: 300;"></paper-input>
             <div id="config" style="float: left;">
               <paper-input label="Size" value={{item.size}} style="width: 40px;"></paper-input>
@@ -36,7 +37,6 @@
               <paper-input label="Image" value={{item.image}}></paper-input>
             </div>
           </div>
-          <iron-image style="height: 150px; width: 100%; position: absolute; left: 0; bottom: 0;" src="{{item.image}}" sizing="cover"></iron-image>
         </paper-material>
       </template>
     </div>
