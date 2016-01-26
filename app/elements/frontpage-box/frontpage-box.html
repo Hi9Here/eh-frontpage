@@ -1,0 +1,64 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/mediator-data/mediator-data.html">
+
+<dom-module id="frontpage-box">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      #config {
+        margin: 10px;
+      }
+
+      h4 {
+        margin: 0px;
+      }
+    </style>
+    <mediator-data data="{{data}}" as-array="{{boxes}}" location="https://eh-frontpage.firebaseio.com/frontpage" folder="boxes"></mediator-data>
+    <div id="boxdone" horizontal layout>
+      <template is="dom-repeat" items="{{boxes}}">
+        <a href="{{item.url}}">
+          <paper-material elevation="1" style$="{{_addp(item.size)}}" >
+            <div id="textBox" style="text-align: center; position: absolute; left: 0; top: 120px; z-index: 1; width: 100%;">
+              <h2 style="width: 100%; float: left; margin: 0 0 5px 0; font-weight: 500; color: #FFF;">{{item.title}}</h2>
+              <h3 style="width: 100%; float: left; margin: 0 0 5px 0; font-weight: 500; color: #FFF;" >{{item.subTitle}}</h3>
+            </div>
+            <iron-image style="height: 300px; width: 100%; position: absolute; left: 0; bottom: 0;" src="{{item.image}}" sizing="cover" width="100%"></iron-image>
+          </paper-material>
+        </a>
+      </template>
+    </div>
+
+  </template>
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'frontpage-box',
+
+        properties: {
+          _boxing: {
+            type: Object,
+            value: {}
+          },
+          boxes: {
+            value: []
+          }
+        },
+
+        _add: function() {
+          this.push('boxes', this._boxing);
+        },
+        _cancel: function() {
+          this.set('_boxing', {});
+        },
+        _addp (val){
+          return 'height: 300px; float:left; margin: 10px; width:' + val + '%';
+        }
+      });
+    })();
+  </script>
+</dom-module>

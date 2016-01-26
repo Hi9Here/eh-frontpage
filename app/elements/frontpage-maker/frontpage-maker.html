@@ -7,12 +7,24 @@
       :host {
         display: block;
       }
-      paper-material {
-        padding: 20px;
-        width: 300px;
+      #config {
+        margin: 10px;
       }
+      h4 {
+        margin: 0px;
+      }
+
     </style>
-    <mediator-data data="{{data}}" as-array="{{boxes}}" location="https://eh-frontpage.firebaseio.com/frontpage" folder="boxes"></mediator-data>
+
+    <div id="imageLibrary" style="float: left; width: 100%; ">
+      <a href="https://drive.google.com/folderview?id=0BzzTbD_bWLfrNUtSWXo5R25fM0E&usp=sharing">
+        <paper-button raised style="float: left; margin: 10px">
+          <iron-icon icon="folder"></iron-icon> Image Library </paper-icon-button>
+      </a>
+    </div>
+    <div id="boxdone" horizontal layout>
+
+
     <template is="dom-repeat" items="{{boxes}}">
       <paper-material elevation="1" style="height: 350px">
         <paper-input label="title" value={{item.title}}></paper-input>
@@ -23,18 +35,19 @@
       </paper-material>
     </template>
     <paper-material elevation="1" style="height: 350px">
+
       <paper-input label="Title" value="{{_boxing.title}}"></paper-input>
       <paper-input label="Sub Title" value="{{_boxing.subTitle}}"></paper-input>
       <div id="smallinput">
         <paper-input label="Size" style="width: 50px; float: left; padding-right: 20px;" value="{{_boxing.size}}"></paper-input>
         <paper-input label="Order" style="width: 50px; float: left;" value="{{_boxing.order}}"></paper-input>
-        <paper-button raised style="float: right; margin: 10px">Image<iron-icon icon="add-circle"></iron-icon></paper-icon-button>
       </div>
-      <paper-input label="URL" style="float: left; clear: left;" value="{{_boxing.url}}"></paper-input>
+      <paper-input label="URL" style="float: left; clear: left; width: 100%;" value="{{_boxing.url}}"></paper-input>
+      <paper-input label="Image URL" style="float: left; clear: left; width: 100%;" value="{{_boxing.image}}"></paper-input>
 
       <div class="buttons" style="padding: 20px; float: left; clear: left;">
         <paper-button raised style="background-color: red; color: white;" dialog-confirm on-tap="_add">Add</paper-button>
-        <paper-button dialog-dismiss>Cancel</paper-button>
+        <paper-button dialog-dismiss on-tap="_cancel">Cancel</paper-button>
       </div>
     </paper-material>
 
@@ -47,16 +60,21 @@
         is: 'frontpage-maker',
 
         properties: {
-          _boxing: {type: Object, value: {}},
-          boxes: {value: []}
+          _boxing: {
+            type: Object,
+            value: {}
+          },
+          boxes: {
+            value: []
+          }
         },
 
         _add: function() {
-          this.push('boxes', this._boxing)
+          this.push('boxes', this._boxing);
         },
-        _cancal : function() {
-          this.set('_boxing', {})
-        },
+        _cancel: function() {
+          this.set('_boxing', {});
+        }
 
       });
     })();
