@@ -7,35 +7,40 @@
       :host {
         display: block;
       }
+
       #config {
         margin: 10px;
       }
+
       h4 {
         margin: 0px;
       }
-
     </style>
-
-    <div id="imageLibrary" style="float: left; width: 100%; ">
-      <a href="https://drive.google.com/folderview?id=0BzzTbD_bWLfrNUtSWXo5R25fM0E&usp=sharing">
-        <paper-button raised style="float: left; margin: 10px">
-          <iron-icon icon="folder"></iron-icon> Image Library </paper-icon-button>
-      </a>
-    </div>
+    <mediator-data data="{{data}}" as-array="{{boxes}}" location="https://eh-frontpage.firebaseio.com/frontpage" folder="boxes"></mediator-data>
     <div id="boxdone" horizontal layout>
-
-
-    <template is="dom-repeat" items="{{boxes}}">
-      <paper-material elevation="1" style="height: 350px">
-        <paper-input label="title" value={{item.title}}></paper-input>
-        <paper-input label="subTitle"  value={{item.subTitle}}></paper-input>
-        <paper-input label="size"  value={{item.size}}></paper-input>
-        <paper-input label="order"  value={{item.order}}></paper-input>
-        <paper-input label="url"  value={{item.url}}></paper-input>
-      </paper-material>
-    </template>
-    <paper-material elevation="1" style="height: 350px">
-
+      <template is="dom-repeat" items="{{boxes}}">
+        <paper-material elevation="1" style="height: 550px; width: 300px; float:left; margin: 10px;">
+          <div id="textBox" style="padding: 20px;">
+            <paper-input label="Title" value={{item.title}} id="titlefont" style="width: 100%; float: left; margin: 0 0 5px 0; font-weight: 300;"></paper-input>
+            <paper-input label="Sub Title" value={{item.subTitle}} id="titlefont" style="width: 100%; float: left; margin: 0 0 5px 0; font-weight: 300;"></paper-input>
+            <div id="config" style="float: left;">
+              <paper-input label="Size" value={{item.size}} style="width: 40px;"></paper-input>
+            </div>
+            <div id="config" style="float: left; width: 40px;">
+              <paper-input label="Order" value={{item.order}}></paper-input>
+            </div>
+            <div id="config" style="width: 250px; float: left;">
+              <paper-input label="Link" value={{item.url}}></paper-input>
+            </div>
+            <div id="config" style="width: 250px; float: left;">
+              <paper-input label="Image" value={{item.image}}></paper-input>
+            </div>
+          </div>
+          <iron-image style="height: 150px; width: 100%; position: absolute; left: 0; bottom: 0;" src="{{item.image}}" sizing="cover"></iron-image>
+        </paper-material>
+      </template>
+    </div>
+    <paper-material elevation="1" style="height: 400px; width: 250px;float: left; margin: 10px; padding: 30px;">
       <paper-input label="Title" value="{{_boxing.title}}"></paper-input>
       <paper-input label="Sub Title" value="{{_boxing.subTitle}}"></paper-input>
       <div id="smallinput">
